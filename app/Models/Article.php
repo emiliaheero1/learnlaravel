@@ -4,12 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class Article extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'body'];
+    protected $fillable = ['title', 'body', 'image'];
+
+    /**
+     * @param UploadedFile $image
+     */
+    public function setImageAttribute($image){
+        $path = $image->store('public');
+        $this->image_path = Storage::url($path);
+
+    }
 
     public function getExcerptAttribute(){
         $parts = explode("\n\n", $this->body);

@@ -6,7 +6,9 @@
         @foreach($articles as $article)
             <div class="col mb-3">
                 <div class="card">
-                    {{--                    <img src="..." class="card-img-top" alt="...">--}}
+                    @if($article->image_path)
+                        <img src="{{$article->image_path}}" class="card-img-top" alt="...">
+                    @endif
                     <div class="card-body">
                         <h5 class="card-title">{{ $article->title }}</h5>
                         <p class="card-text">{{$article->excerpt }} </p>
