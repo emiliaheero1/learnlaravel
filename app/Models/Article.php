@@ -9,6 +9,8 @@ class Article extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['title', 'body'];
+
     public function getExcerptAttribute(){
         $parts = explode("\n\n", $this->body);
         if(strlen($parts[0])<300){

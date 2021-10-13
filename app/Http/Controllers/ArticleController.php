@@ -43,7 +43,7 @@ class ArticleController extends Controller
             'body' => 'required',
         ]);
 
-       
+
 
         $article=new Article();
         $article->title=$request->input('title');
