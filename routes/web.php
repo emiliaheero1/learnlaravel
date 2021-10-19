@@ -27,3 +27,13 @@ Route::resource('/admin/articles', ArticleController::class);
 //Route::get('/admin/articles/{article}/edit', [ArticleController::class,'edit']);
 //Route::post('/admin/articles/{article}', [ArticleController::class,'update']);
 //Route::get('/admin/articles/{article}/delete', [ArticleController::class,'destroy']);
+
+Route::middleware(['auth'])->group(function() {
+    Route::get('/home', function() {
+        return view('home');
+    })->name('home');
+
+    Route::get('/user/profile', function() {
+        return view('profile');
+    })->name('profile');
+});
