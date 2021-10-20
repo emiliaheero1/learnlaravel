@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateArticleRequest;
+use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,13 +11,17 @@ use Illuminate\Support\Facades\Auth;
 class ArticleController extends Controller
 {
 
+    public function __construct(){
+        $this->middleware('article.owner.check')->except(['index', 'store', 'create']);
+    }
+
 
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        $articles=Article::paginate();
+        $articles=Auth::user()->articles()->paginate();
         return response()-> view('articles.index', compact('articles'));
     }
 
@@ -84,10 +89,10 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Article $article)
+    public function update(UpdateArticleRequest $request, Article $article)
     {
-        $article->title=$request->input('title');
-        $article->body=$request->input('body');
+        $article->fill($request->validated());
+
         $article->save();
 
         return response()->redirectToRoute('articles.index');

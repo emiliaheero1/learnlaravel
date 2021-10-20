@@ -23,9 +23,13 @@
                     <a class="nav-link" href="/articles">articles</a>
                 </li>
 
+                    @auth
+
                 <li class="nav-item">
                     <a class="nav-link" href="/admin/articles">admin</a>
                 </li>
+                    @endauth
+
 
 
 
