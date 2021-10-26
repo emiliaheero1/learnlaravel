@@ -14,7 +14,17 @@
                         <p class="card-text">{{$article->excerpt }} </p>
                         <a href="{{route("article", ['article' => $article-> id])}}" class="btn btn-primary">Read more</a>
                         <p class="card-text"><small class="text-muted">{{$article->user->name}}</small></p>
-                        <p class="card-text"><small class="text-muted">{{$article->created_at->diffForHumans()}}</small></p>
+                        <p class="card-text"><small class="text-muted">Created: {{$article->created_at->diffForHumans()}}</small></p>
+                        <p class="card-text"><small class="text-muted">Updated: {{$article->updated_at->diffForHumans()}}</small></p>
+                        <p class="card-text"><small class="text-muted">Comments: {{$article->comments()-> count()}}</small></p>
+                        <p class="card-text"><small class="text-muted">Likes: {{$article->likes()-> count()}}</small></p>
+                        <a href="/articles/{{$article->id}}/like">
+                            @if($article->isliked)
+                                unlike
+                            @else
+                            Like
+                            @endif
+                        </a>
                     </div>
                 </div>
             </div>

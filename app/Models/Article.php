@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class Article extends Model
@@ -14,11 +15,20 @@ class Article extends Model
     protected $fillable = ['title', 'body', 'image'];
 
     public function comments(){
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class)->latest();
     }
+
+    public function likes(){
+        return $this->hasMany(Like::class);
+    }
+
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function getIsLikedAttribute(){
+        return $this->likes()->where('user_id', Auth::user()->id)->exists();
     }
 
     /**

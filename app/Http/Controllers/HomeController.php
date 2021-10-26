@@ -16,7 +16,7 @@ class HomeController extends Controller
     public function articles()
     {
 
-        $articles = Article::paginate(16);
+        $articles = Article::latest()->paginate(16);
 
         return view('articles', compact('articles'));
     }

@@ -17,7 +17,7 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [HomeController::class,'index']);
 Route::get('/articles', [HomeController::class,'articles']);
 Route::get('/articles/{article}', [HomeController::class,'article'])->whereNumber("article")->name("article");
-
+Route::get('/articles/{article}/like', [\App\Http\Controllers\LikeController::class, 'store']);
 
 //Route::get('/admin/articles', [ArticleController::class,'index']);
 //Route::get('/admin/articles/create', [ArticleController::class,'create']);
@@ -26,6 +26,8 @@ Route::get('/articles/{article}', [HomeController::class,'article'])->whereNumbe
 //Route::get('/admin/articles/{article}/edit', [ArticleController::class,'edit']);
 //Route::post('/admin/articles/{article}', [ArticleController::class,'update']);
 //Route::get('/admin/articles/{article}/delete', [ArticleController::class,'destroy']);
+
+Route::post('/article/{article}', [\App\Http\Controllers\CommentController::class, 'store'])->name('comment.store');
 
 Route::middleware(['auth'])->group(function() {
     Route::resource('/admin/articles', ArticleController::class);
