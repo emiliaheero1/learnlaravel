@@ -28,7 +28,14 @@ class Article extends Model
     }
 
     public function getIsLikedAttribute(){
+        if (Auth::guest()){
+            return false;
+        }
         return $this->likes()->where('user_id', Auth::user()->id)->exists();
+    }
+
+    public function tags(){
+        return $this->belongsToMany(Tag::class);
     }
 
     /**
