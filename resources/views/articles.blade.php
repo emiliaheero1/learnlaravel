@@ -15,7 +15,7 @@
                         <a href="{{route("article", ['article' => $article-> id])}}" class="btn btn-primary mb-2">Read more</a>
 
                         <p class="card-text">
-                            <a href="/articles/author/{{$article->user->name}}"> <small class="text-muted">{{$article->user->name}}</small></a><br>
+                            <a href="/articles/author/{{$article->user->id}}"> <small class="text-muted">{{$article->user->name}}</small></a><br>
                             <small class="text-muted">Created: {{$article->created_at->diffForHumans()}}</small><br>
                             <small class="text-muted">Updated: {{$article->updated_at->diffForHumans()}}</small><br>
                             <small class="text-muted me-2">Comments: {{$article->comments()-> count()}}</small>

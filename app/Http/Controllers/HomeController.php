@@ -32,8 +32,8 @@ class HomeController extends Controller
         return view('articles', compact('articles'));
         }
 
-public function author(Article $author){
-        return view('author');
+public function author(User $author){
+        return view('author', compact('author'));
 }
 
 }
