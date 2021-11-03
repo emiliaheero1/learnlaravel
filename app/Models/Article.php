@@ -12,7 +12,11 @@ class Article extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'body', 'image'];
+    protected $fillable = ['title', 'body'];
+
+    public function images(){
+        return $this->hasMany(Image::class);
+    }
 
     public function comments(){
         return $this->hasMany(Comment::class)->latest();
@@ -41,11 +45,7 @@ class Article extends Model
     /**
      * @param UploadedFile $image
      */
-    public function setImageAttribute($image){
-        $path = $image->store('public');
-        $this->image_path = Storage::url($path);
 
-    }
 
     public function getExcerptAttribute(){
         $parts = explode("\n\n", $this->body);

@@ -37,7 +37,21 @@
         </div>
 
 
-
+        @error('tags')
+        @foreach($errors->get('tags') as $error)
+            <div class="alert alert-danger" role="alert">
+                {{$error}}
+            </div>
+        @endforeach
+        @enderror
+        <div class="mb-3">
+            <label for="tags" class="form-label">tags</label>
+            <select class="form-select" id="tags" name="tags[]" multiple>
+                @foreach($tags as $tag)
+                    <option value="{{$tag->id}}">{{$tag->name}}</option>
+                @endforeach
+            </select>
+        </div>
 
 
 
@@ -49,8 +63,8 @@
         @endforeach
         @enderror
         <div class="mb-3">
-            <label for="title" class="form-label">image</label>
-            <input type="file" class="form-control" id="image" name="image" accept="image/*">
+            <label for="image" class="form-label">image</label>
+            <input type="file" class="form-control" id="image" name="image[]" accept="image/*" multiple>
         </div>
 
 

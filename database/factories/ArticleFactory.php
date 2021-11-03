@@ -29,7 +29,6 @@ class ArticleFactory extends Factory
         return [
             'title' => $this->faker->sentence,
             'body' => $this->faker->paragraphs(3, true),
-            'image_path' => 'https://picsum.photos/seed/' . $this->faker->uuid . '/1280/720/',
             'created_at' => $created,
             'updated_at' => $updated,
         ];

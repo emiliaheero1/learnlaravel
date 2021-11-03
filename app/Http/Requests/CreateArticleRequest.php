@@ -26,7 +26,8 @@ class CreateArticleRequest extends FormRequest
         return [
             'title'=> 'required|max:255',
             'body' => 'required',
-            'image' => 'image',
+            'image.*' => 'image',
+            'tags.*'=>'exists:tags,id'
         ];
     }
 }
